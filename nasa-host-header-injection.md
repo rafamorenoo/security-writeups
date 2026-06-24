@@ -1,39 +1,69 @@
-# NASA – Host Header Injection Leading to Open Redirect
+# Host Header Injection Leading to Open Redirect Behavior
 
-## 📌 Overview
-A Host header injection issue was identified in a web application that resulted in improper handling of redirect logic.
+## Overview
 
----
+A Host header manipulation issue was identified in a web application, where user-controlled input influenced URL generation logic.
 
-## 🔍 Discovery Method
-Identified during security testing of web application request handling and validation of HTTP headers.
+This resulted in an open redirect behavior affecting trusted application flows.
 
 ---
 
-## 🧨 Vulnerability Details
-The application processed user-controlled Host headers without proper validation, allowing manipulation of redirect behavior.
+## 🧠 Attack Surface Discovery
+
+During testing of application routing and request handling, it was observed that the system dynamically constructed URLs using request metadata.
+
+This indicated a potential trust boundary issue between:
+
+- user-controlled headers
+- server-side URL generation logic
 
 ---
 
-## ⚠️ Impact
-- Open redirect behavior
-- Potential phishing exploitation
-- Abuse of trusted domain redirection logic
+## ⚙️ Root Cause
+
+The vulnerability was caused by:
+
+- unsafe usage of Host header in application logic
+- lack of validation of trusted origin
+- dynamic URL construction based on untrusted input
+
+This leads to **trust boundary violation in request processing**.
 
 ---
 
-## 🧠 Technical Analysis
-- OWASP A01: Broken Access Control
-- OWASP A03: Injection (context-dependent)
+## 💥 Security Impact
+
+This issue can lead to:
+
+- open redirect behavior
+- phishing vector amplification
+- bypass of trusted domain assumptions
+- manipulation of user navigation flows
+
+In some cases, it can be chained with authentication flows.
 
 ---
 
-## 🛠️ Remediation
-- Validate and sanitize Host headers
-- Enforce strict redirect allowlists
-- Avoid using user-controlled headers in URL generation
+## 🧠 Why This Happens
+
+This is commonly caused by:
+
+- incorrect assumptions about HTTP headers
+- missing validation of origin metadata
+- insecure URL construction patterns
 
 ---
 
-## 📬 Disclosure
-Reported via bug bounty program and acknowledged by the security team.
+## 🛡️ Mitigation
+
+- validate Host header against allowlist
+- avoid using headers for security decisions
+- implement strict URL generation rules
+- enforce canonical domain configuration
+
+---
+
+## 🔗 Classification
+
+- OWASP: A01 Injection
+- CWE: CWE-20 Improper Input Validation
