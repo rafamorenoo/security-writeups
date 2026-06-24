@@ -1,69 +1,43 @@
-# Host Header Injection Leading to Open Redirect Behavior
+# Header-Based Redirect Behavior in NASA Authentication System
 
-## Overview
+## 🧠 Summary
 
-A Host header manipulation issue was identified in a web application, where user-controlled input influenced URL generation logic.
+During authorized security testing in a NASA vulnerability disclosure program, a redirect behavior was observed where user-controlled request headers influenced URL generation logic.
 
-This resulted in an open redirect behavior affecting trusted application flows.
-
----
-
-## 🧠 Attack Surface Discovery
-
-During testing of application routing and request handling, it was observed that the system dynamically constructed URLs using request metadata.
-
-This indicated a potential trust boundary issue between:
-
-- user-controlled headers
-- server-side URL generation logic
+The application reflected attacker-controlled input in redirect responses.
 
 ---
 
-## ⚙️ Root Cause
+## 🔍 Affected Asset
 
-The vulnerability was caused by:
-
-- unsafe usage of Host header in application logic
-- lack of validation of trusted origin
-- dynamic URL construction based on untrusted input
-
-This leads to **trust boundary violation in request processing**.
+NASA-related authentication service (redacted)
 
 ---
 
-## 💥 Security Impact
+## ⚙️ Observed Behavior
 
-This issue can lead to:
-
-- open redirect behavior
-- phishing vector amplification
-- bypass of trusted domain assumptions
-- manipulation of user navigation flows
-
-In some cases, it can be chained with authentication flows.
+- Request headers were used in URL construction logic
+- Redirect responses reflected attacker-controlled input
+- No validated backend redirect logic was confirmed
 
 ---
 
-## 🧠 Why This Happens
+## 🚫 Limitations
 
-This is commonly caused by:
-
-- incorrect assumptions about HTTP headers
-- missing validation of origin metadata
-- insecure URL construction patterns
+- No exploit chain was demonstrated
+- No authentication bypass or session impact was observed
+- Classified as informational by triage
 
 ---
 
-## 🛡️ Mitigation
+## 🧠 Security Impact
 
-- validate Host header against allowlist
-- avoid using headers for security decisions
-- implement strict URL generation rules
-- enforce canonical domain configuration
+Indicates unsafe handling of request metadata in redirect logic, which may lead to misleading navigation behavior under certain conditions.
 
 ---
 
-## 🔗 Classification
+## 🛡️ Recommendations
 
-- OWASP: A01 Injection
-- CWE: CWE-20 Improper Input Validation
+- Avoid using request headers in redirect logic
+- Validate redirect targets using strict allowlists
+- Use canonical server-side URL generation
