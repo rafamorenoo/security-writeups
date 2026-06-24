@@ -104,10 +104,15 @@ My typical security research workflow:
 
 security-writeups/
 │
+
 ├── vodafone-exposed-panel.md
+
 ├── nasa-host-header-injection.md
+
 ├── defi-liquidation-bypass.md
+
 ├── methodology.md
+
 └── README.md
 
 
