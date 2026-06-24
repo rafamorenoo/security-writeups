@@ -1,35 +1,68 @@
-# DeFi Protocol – Critical Liquidation Logic Flaw
+# Critical Liquidation Logic Flaw in Smart Contract System
 
-## 📌 Overview
-A critical logic vulnerability was identified in a DeFi smart contract affecting liquidation mechanisms.
+## Overview
 
----
+A critical logic vulnerability was identified in a DeFi protocol affecting the liquidation mechanism.
 
-## 🧨 Vulnerability Details
-A flaw in the contract’s state handling allowed incorrect liquidation state transitions under specific conditions, bypassing intended protocol behavior.
+The issue allowed state manipulation that bypassed expected liquidation constraints.
 
 ---
 
-## ⚠️ Impact
-- Incorrect liquidation behavior
-- Potential disruption of protocol stability
-- Financial risk to protocol participants
+## 🧠 Attack Surface Analysis
+
+The vulnerability was identified through manual smart contract analysis focusing on:
+
+- state transition logic
+- liquidation conditions
+- edge-case execution paths
+- invariant violations
 
 ---
 
-## 🧠 Technical Analysis
-- Smart contract logic flaw
-- Incorrect state validation
-- DeFi protocol design weakness
+## ⚙️ Root Cause
+
+The issue was caused by:
+
+- improper state validation before liquidation execution
+- missing constraints on cooldown mechanism
+- incorrect handling of zero-value interactions
+
+This resulted in **logic-level bypass of expected protocol behavior**.
 
 ---
 
-## 🛠️ Mitigation
-- Strengthen state transition validation
-- Add invariant checks
-- Improve liquidation condition handling
+## 💥 Security Impact
+
+This vulnerability could lead to:
+
+- disruption of liquidation mechanisms
+- economic manipulation of protocol state
+- blocking of expected liquidation flows
+- potential financial impact depending on asset exposure
 
 ---
 
-## 📬 Disclosure
-Reported to the program and confirmed by security reviewers.
+## 🧠 Why This Happens
+
+Common causes in DeFi systems:
+
+- complex state machines without proper invariants
+- insufficient edge-case validation
+- missing formal verification of logic paths
+
+---
+
+## 🛡️ Mitigation
+
+- enforce strict invariant checks
+- validate all state transitions
+- simulate edge-case scenarios
+- implement formal verification where possible
+
+---
+
+## 🔗 Classification
+
+- Smart Contract Vulnerability
+- Logic Design Flaw
+- DeFi Protocol Risk Pattern
